@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build: .  # Builds from the Dockerfile in the current directory
+    ports:
+      - "3030:3030"  # Map host port 3030 to container port 3030
+    environment:
+      - DB_HOST=db  # Use the 'db' service name as the host
+      - DB_PORT=5432
+      - DB_NAME=practise
+      - DB_USER=postgres
+      - DB_PASS=Akash
+      - JWT_SECRET=your_jwt_secret
+      - PORT=3030
+    depends_on:
+      - db  # Ensure DB starts before the app
+    restart: unless-stopped  # Restart on failure
+
+  db:
+    image: postgres:13  # Use PostgreSQL 13
+    environment:
+      - POSTGRES_DB=practise  # Create the database
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Akash
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist data
+    ports:
+      - "5432:5432"  # Optional: Expose DB port for external access (e.g., via pgAdmin)
+    restart: unless-stopped
+
+volumes:
+  postgres_data:  # Named volume for DB persistence
