@@ -15,6 +15,21 @@ pipeline {
             }
         }
 
+        // NEW STAGE: First Test Run (runs tests early for quick feedback)
+        stage('First Test Run') {
+            steps {
+                nodejs('MyNodeJS') {
+                    sh '''
+                        if [ -f package.json ]; then
+                            npm test || echo "No tests found or tests failed"
+                        else
+                            echo "No package.json found"
+                        fi
+                    '''
+                }
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 nodejs('MyNodeJS') { 
