@@ -12,7 +12,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: 'https://github.com/yourusername/yourrepo.git'
+                git branch: 'main', credentialsId: env.GITHUB_CREDENTIALS_ID, url: 'https://github.com/Dragonravst/projectpractisev1.git'
             }
         }
 
