@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18'
-            args '-u root:root'
-        }
-     }
+    agent any
     environment {
         DOCKER_IMAGE = 'akash13raja/nodejspostdocker'
         DOCKER_TAG = "${env.BUILD_NUMBER}"
